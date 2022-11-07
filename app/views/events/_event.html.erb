@@ -1,0 +1,20 @@
+<li>
+  The location of event: <%= event.location %>.<br>
+  Date of event: <%= event.event_date %>.
+  <%= form_with model:event.attend_events.build,data: {turbo:false} do |f| %>
+      <div>
+       <%= hidden_field_tag :user_id, @user.id %>
+       <%= hidden_field_tag :attended_event_id, event.id %>
+       
+      </div>
+      <% if event.attendees.include?(@user) || event.creator_id == @user.id %>
+        <% if event.creator_id == @user.id %>
+         <p style="color:green">Creator Of The Event</p>
+         <% else %>
+        <p style="color:purple">Attended</p>
+        <% end %>
+      <% else %>
+        <%= f.submit "Attend" %>
+      <% end %>
+  <% end %>
+</li>

@@ -1,0 +1,14 @@
+<h1>Users List</h1>
+
+<%= form_with model: @user, data: {turbo:false} do |f| %>
+  <ol>
+  <% @users.each do |user| %>
+      <li>
+         <%= user.name.titleize %>.<br>
+         View the page of user: <%= link_to "Show page", user_path(user)%>
+      </li>
+  <% end %>
+  </ol>
+<% end %>
+
+<%= link_to "New User", new_user_path %>

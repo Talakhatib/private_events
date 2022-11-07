@@ -1,0 +1,10 @@
+<h1> List of Events</h1>
+
+  <ol>
+    <% @events.each do |event| %>
+      <%= render event %>
+    <% end %>
+ </ol>
+
+ <%= link_to "Back To User List" ,root_path %> |
+ <%= link_to "Go back",user_path(@user) %>

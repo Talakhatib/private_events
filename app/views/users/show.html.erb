@@ -1,0 +1,41 @@
+
+<h1>Events Created by <%= @user.name.titleize %></h1>
+
+ <% if @user.events.any? %>
+   <ul> 
+      <% @user.events.each do |event| %>
+      <li>
+       The location : <%= event.location %>.<br>
+       The date : <%= event.event_date %>
+       <%= button_to "Delete event",[@user,event], method: :delete %>
+      </li>
+      <% end %>
+   </ul>
+ <% end %>
+ <% if @user.attend_events.any? %>
+ <h2>Attended Events</h2>
+    <ol>
+       <% @user.attended_events.each do |attended_event| %>
+          <li> 
+               The location : <%= attended_event.location %>.<br>
+               The date : <%= attended_event.event_date %>
+
+          </li>
+       <% end %>
+    </ol>
+ <% end %>
+
+ <p> <h3>Add Event</h3>
+  <%= form_with model: [@user, @user.events.build ] ,data: {turbo: false} do |f| %>
+    
+    <%= f.label :event_date, "Event date" %>
+    <%= f.datetime_field :event_date %><br>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+
+    <%= f.submit "Add event" %>
+    
+  <% end %>
+  <%= link_to "Go to the list of events", user_events_path(@user) %> |
+  <%= link_to "User list" , root_path %>
+ </p>
