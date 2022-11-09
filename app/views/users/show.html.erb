@@ -10,11 +10,12 @@
        The date : <%= event.event_date %> | 
        <%= link_to "Edit Event", edit_user_event_path(event) %>
        <%= button_to "Delete event",[@user,event], method: :delete %> 
-
       </li>
+      <br>
       <% end %>
    </ul>
  <% end %>
+
  <% if @user.attend_events.any? %>
  <h2>Attended Events</h2>
     <ol>
