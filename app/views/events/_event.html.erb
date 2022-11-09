@@ -1,7 +1,7 @@
 <li>
   The location of event: <%= event.location %>.<br>
   Date of event: <%= event.event_date %>.
-  <%= form_with model:event.attend_events.build,data: {turbo:false} do |f| %>
+  <%= form_with model: event.attend_events.build,data: {turbo:false} do |f| %>
       <div>
        <%= hidden_field_tag :user_id, @user.id %>
        <%= hidden_field_tag :attended_event_id, event.id %>
@@ -18,3 +18,6 @@
       <% end %>
   <% end %>
 </li>
+<% if event.attendees.include?(@user) %>
+<%= button_to "Delete Attendee", attend_event_path(event.attend_events.get_id(@user.id)) ,method: :delete, :onclick => "return confirm('Are you sure you want to delete your self from the attendee list? ')" %>
+<% end %>

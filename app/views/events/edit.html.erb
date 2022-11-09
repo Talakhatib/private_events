@@ -1,0 +1,11 @@
+<h1>Edit The Event For User <%= @user.name.titleize %></h1>
+
+<%= form_with model:[@user,@event] ,data: {turbo:false} do |f| %>
+
+  <%= f.label :location %><br>
+  <%= f.text_field :location %><br><br>
+  <%= f.label :event_date %><br>
+  <%= f.datetime_field :event_date %><br><br>
+
+   <%= f.submit "Edit" %>
+<% end %>

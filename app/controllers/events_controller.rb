@@ -1,8 +1,12 @@
 class EventsController < ApplicationController
+
     def index
-        @events = Event.all
+        events = Event.all
+        @old_events = events.old
+        @recent_events = events.recent
         @user = User.find(params[:user_id])
     end
+
     def create
         @user = User.find(params[:user_id])
         
@@ -11,6 +15,21 @@ class EventsController < ApplicationController
           redirect_to user_path(@user)
        end
     end
+
+    def edit
+        @user = User.find(params[:user_id])
+        @event =Event.find(params[:id])
+    end
+
+    def update
+       @user = User.find(params[:user_id])
+       @event = Event.find(params[:id]) 
+       if @event.update!(event_params)
+          flash[:success] = "The event was successfully updated!!"
+          redirect_to user_path(@user)
+       end
+    end
+
     def destroy
         user = User.find(params[:user_id])
         event = user.events.find_by(params[:id])

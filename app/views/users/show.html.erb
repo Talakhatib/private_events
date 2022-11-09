@@ -1,4 +1,5 @@
-
+<h2>  <%= link_to "Go to the list of events", user_events_path(@user) %> |
+  <%= link_to "User list" , root_path %></h2>
 <h1>Events Created by <%= @user.name.titleize %></h1>
 
  <% if @user.events.any? %>
@@ -6,8 +7,10 @@
       <% @user.events.each do |event| %>
       <li>
        The location : <%= event.location %>.<br>
-       The date : <%= event.event_date %>
-       <%= button_to "Delete event",[@user,event], method: :delete %>
+       The date : <%= event.event_date %> | 
+       <%= link_to "Edit Event", edit_user_event_path(event) %>
+       <%= button_to "Delete event",[@user,event], method: :delete %> 
+
       </li>
       <% end %>
    </ul>
@@ -28,14 +31,12 @@
  <p> <h3>Add Event</h3>
   <%= form_with model: [@user, @user.events.build ] ,data: {turbo: false} do |f| %>
     
-    <%= f.label :event_date, "Event date" %>
-    <%= f.datetime_field :event_date %><br>
-    <%= f.label :location %>
-    <%= f.text_field :location %>
+    <%= f.label :event_date, "Event date" %><br>
+    <%= f.datetime_field :event_date %><br><br>
+    <%= f.label :location %><br>
+    <%= f.text_field :location %><br><br>
 
     <%= f.submit "Add event" %>
     
   <% end %>
-  <%= link_to "Go to the list of events", user_events_path(@user) %> |
-  <%= link_to "User list" , root_path %>
  </p>

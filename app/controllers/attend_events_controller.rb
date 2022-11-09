@@ -11,4 +11,9 @@ class AttendEventsController < ApplicationController
            redirect_to user
        end
     end
+    def destroy
+        attend_event = AttendEvent.find(params[:id])
+        attend_event.destroy
+        redirect_to user_path(attend_event.attendee_id)
+    end
 end
