@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   root "users#index"
  
   resources :users do
-     resources :events 
+     resources :events do
+      resources :invitations , only: [:create]
+     end
   end
   resources :attend_events
+
 end

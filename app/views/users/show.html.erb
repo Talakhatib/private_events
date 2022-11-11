@@ -9,7 +9,29 @@
        The location : <%= event.location %>.<br>
        The date : <%= event.event_date %> | 
        <%= link_to "Edit Event", edit_user_event_path(event) %>
-       <%= button_to "Delete event",[@user,event], method: :delete %> 
+       <%= button_to "Delete event",[@user,event], method: :delete %>
+       
+         <h3>Invitation :</h3>
+          <ol>
+           <% @users.each  do |user| %>
+           <% if @user.invited_users.include?(user) %>
+           <li> 
+             <p><%= user.name.titleize %><p>
+             <p style="color:purple"> Invited</p> 
+           </li>
+           <br>
+           <% else %>
+           <li>
+             <%= form_with url:user_event_invitations_path(@user,event), data: {turbo: false} do |f| %>
+               <%= user.name.titleize %>
+               <%= hidden_field_tag :invited_user , user.id %><br>
+               <%= f.submit "Invite User" %>
+             <% end %> 
+           </li>
+           <br>
+           <% end %>
+           <% end %>
+          </ol>
       </li>
       <br>
       <% end %>
