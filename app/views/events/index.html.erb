@@ -6,14 +6,18 @@
   <h2>Recent Event</h2>
   <ol>
     <% @recent_events.each do |event| %>
-      <%= render event %>
+       <% if event.invited_users.include?(@user) || @user.id == event.creator_id %>
+         <%= render event %>
+       <% end %>
     <% end %>
  </ol>
 
   <h2>Old Events</h2>
   <ol>
     <% @old_events.each do |event| %>
-      <%= render event %>
+      <% if event.invited_users.include?(@user) || @user.id == event.creator_id %>
+         <%= render event %>
+       <% end %>
     <% end %>
  </ol>
 
