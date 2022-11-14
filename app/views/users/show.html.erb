@@ -14,7 +14,7 @@
          <h3>Invitation :</h3>
           <ol>
            <% @users.each  do |user| %>
-           <% if @user.invited_users.include?(user) %>
+           <% if @user.invited_users.include?(user) && event.invited_users.include?(user)%>
            <li> 
              <p><%= user.name.titleize %><p>
              <p style="color:purple"> Invited</p> 
