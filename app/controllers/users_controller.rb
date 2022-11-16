@@ -10,10 +10,9 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save 
-            flash[:success]="A new user was created!!"
+            flash[:success]="A new user was created !!"
             redirect_to @user
         else 
-            flash[:danger]="Failed to create a new user. Please try again ! "
             render 'new'
         end
     end
@@ -23,8 +22,30 @@ class UsersController < ApplicationController
         @users = User.where.not(id: @user.id)
     end
 
+    def edit
+        @user = User.find(params[:id])
+    end
+
+    def update
+
+        @user = User.find(params[:id])
+
+        if @user.update(user_params)
+            flash[:success] = "User Information Was Successfuly Updated. Please Check Your Email !!"
+            UserMailer.user_updated_information(@user).deliver_now
+            redirect_to @user
+        else
+           render :edit
+        end
+
+    end
+
+    def information
+        @user = User.find(params[:user])
+    end
+
     private 
     def user_params 
-        params.require(:user).permit(:name)
+        params.require(:user).permit(:name,:password,:password_confirmation,:email,:phone,:date_of_birth,:address)
     end
 end

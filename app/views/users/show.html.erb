@@ -1,5 +1,5 @@
 <h2>  <%= link_to "Go to the list of events", user_events_path(@user) %> |
-  <%= link_to "User list" , root_path %></h2>
+  <%= link_to "User list" , root_path %> | <%= link_to "Edit User Information" , edit_user_path(@user)%></h2>
 <h1>Events Created by <%= @user.name.titleize %></h1>
 
  <% if @user.events.any? %>

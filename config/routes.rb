@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   # root "articles#index"
   
   root "users#index"
- 
+  get '/user/information', to: "users#information"
   resources :users do
      resources :events do
       resources :invitations , only: [:create]
      end
   end
   resources :attend_events
+
+  default_url_options :host => 'localhost:3000'
 
 end

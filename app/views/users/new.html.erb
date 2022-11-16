@@ -1,9 +1,3 @@
 <h1>Creating New User</h1>
 
-<%= form_with model:@user, data: {turbo:false} do |f| %>
-  <%= render 'shared/error_message',object: f.object %>
-   <%= f.label :name %>
-   <%= f.text_field :name %><br><br>
-
-   <%= f.submit  "Add User" %>
-<% end %>
+<%= render 'shared/form' %>

@@ -1,0 +1,6 @@
+<h2> Updated Information </h2>
+
+<p>
+Hello user <%= @user.name.titleize %> to check your updated information click on th link below:
+<%= link_to "Information", user_information_url(user: @user) %>
+</p>
