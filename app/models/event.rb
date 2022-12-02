@@ -10,6 +10,9 @@ class Event < ApplicationRecord
     has_many :invitations , foreign_key: :event_id , class_name:"Invitation" , dependent: :destroy
     has_many :invited_users, through: :invitations, source: :invited
 
+    has_many :event_categories,dependent: :destroy
+    has_many :categories,through: :event_categories,source: :category
+
     validates :event_date, presence: true
     validates :location, presence: true
     

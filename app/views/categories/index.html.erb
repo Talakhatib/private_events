@@ -1,0 +1,16 @@
+<h1>Categories List:</h1>
+<ul>
+<% @categories.each do |cat| %>
+  <li> <h3><%= cat.title.capitalize %></h3>
+    <h4>Events belong to this category:</h4>
+    <ol>
+    <% cat.events.each do |event| %>
+    <li>
+    location: <%= event.location %><br>
+    Date: <%= event.event_date %><br>
+    Creator Of event : <%= event.creator.name.capitalize %>  
+    </li>
+    <% end %>
+    </ol>
+<% end %>
+</ul>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_16_095808) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_02_105116) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_095808) do
     t.index ["attended_event_id"], name: "index_attend_events_on_attended_event_id"
     t.index ["attendee_id", "attended_event_id"], name: "index_attend_events_on_attendee_id_and_attended_event_id", unique: true
     t.index ["attendee_id"], name: "index_attend_events_on_attendee_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "event_categories", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_event_categories_on_category_id"
+    t.index ["event_id"], name: "index_event_categories_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -52,4 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_095808) do
     t.string "address"
   end
 
+  add_foreign_key "categories", "users"
+  add_foreign_key "event_categories", "categories"
+  add_foreign_key "event_categories", "events"
 end

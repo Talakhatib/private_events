@@ -1,0 +1,3 @@
+class EventCategoriesController < ApplicationController
+    
+end

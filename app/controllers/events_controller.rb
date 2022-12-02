@@ -9,8 +9,13 @@ class EventsController < ApplicationController
 
     def create
         @user = User.find(params[:user_id])
-        
-       if @user.events.create!(event_params)
+        categories = params[:categories]
+        if @user.events.create(event_params)
+          event = Event.find_by(event_params)
+          categories.each do |cat|
+            category = Category.find(cat)
+            EventCategory.create!(event: event ,category: category )
+          end
           flash[:success]= "New event was added!!"
           redirect_to user_path(@user)
        end
