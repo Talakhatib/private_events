@@ -14,7 +14,7 @@ class EventsController < ApplicationController
           event = Event.find_by(event_params)
           categories.each do |cat|
             category = Category.find(cat)
-            EventCategory.create!(event: event ,category: category )
+            EventCategory.create(event: event ,category: category )
           end
           flash[:success]= "New event was added!!"
           redirect_to user_path(@user)
@@ -29,7 +29,7 @@ class EventsController < ApplicationController
     def update
        @user = User.find(params[:user_id])
        @event = Event.find(params[:id]) 
-       if @event.update!(event_params)
+       if @event.update(event_params)
           flash[:success] = "The event was successfully updated!!"
           redirect_to user_path(@user)
        end
